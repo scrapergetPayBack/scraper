@@ -1,8 +1,9 @@
+import asyncio
 import csv
 import database
 file_path = 'C:\\Users\\milan\\OneDrive\\Desktop\\All-Live-Shopify-Sitescsv\\All-Live-Shopify-Sites.csv'  # Replace with your actual file path
 
-def read_csv_into_database():
+async def read_csv_into_database():
     with open(file_path, mode='r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         
@@ -21,6 +22,9 @@ def read_csv_into_database():
                 "shop_urls": location_list,
             }
 
-            database.create_shop(shop_data)
+            await database.create_shop(shop_data)
 
-            
+
+
+if __name__ == '__main__':
+    asyncio.run(read_csv_into_database())

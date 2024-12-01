@@ -33,6 +33,7 @@ class ShopUpdateModel(BaseModel):
 
 
 
+
 #----------------------Products collection models----------------------
 class ProductModel(BaseModel):
     shop_id: ObjectId = Field(..., description="ID of the shop this product belongs to")

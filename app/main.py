@@ -12,7 +12,8 @@ shop_data = {
     
 }
 
-database.test_connection()
+# database.test_connection()
+print(database.get_shop_collection())
 
 # database.update_shop_fields({"_id":ObjectId("672f5a3f88a853fd0bf80d9b")}, {"last_scanned": datetime.utcnow(),
 #     "products_on_sale_percentage": 80,
