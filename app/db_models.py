@@ -39,15 +39,15 @@ class ProductModel(BaseModel):
     shop_id: ObjectId = Field(..., description="ID of the shop this product belongs to")
     title: str = Field(..., description="Title of the product")
     title2: str = Field(..., description="Title of the product inside of the variants object")
-    price: float
-    compare_at_price: Optional[float] = None
+    price: int
+    compare_at_price: Optional[int] = None
     is_on_sale: Optional[bool] = False
     last_scanned: datetime = Field(default_factory=datetime.utcnow, description="Timestamp of the last scan")
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 class UpdateProductModel(BaseModel):
-    price: Optional[float] = Field(None, description="Updated price of the variant")
-    compare_at_price: Optional[float] = Field(None, description="Updated compare_at price of the variant")
+    price: Optional[int] = Field(None, description="Updated price of the variant")
+    compare_at_price: Optional[int] = Field(None, description="Updated compare_at price of the variant")
     last_scanned: Optional[datetime] = Field(default_factory=datetime.utcnow, description="Updated timestamp of the last scan")
     is_on_sale: Optional[bool] = False
     model_config = ConfigDict(arbitrary_types_allowed=True)
@@ -57,15 +57,31 @@ class UpdateProductModel(BaseModel):
 
 
 
-#----------------------Price_history collection models----------------------
+class HistoryEntryModel(BaseModel):
+    price: int
+    compare_at_price: Optional[int] = None
+    timestamp: datetime = Field(default_factory=datetime.utcnow, description="Timestamp of when this item was scanned")
+
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 class PriceHistoryModel(BaseModel):
     product_id: ObjectId = Field(..., description="ID of the product this history snapshot belongs to")
-    price: float
-    compare_at_price: Optional[float] = None
-    timestamp: datetime = Field(default_factory=datetime.utcnow, description="Timestampt of when this item was scanned")
+    history: List[HistoryEntryModel] = Field(default_factory=list)
+
     model_config = ConfigDict(arbitrary_types_allowed=True)
 class UpdatePriceHistoryModel(BaseModel):
-    price: float
-    compare_at_price: Optional[float] = None
-    timestmap: datetime = Field(default_factory=datetime.utcnow, description="Timestampt of when this item was scanned")
+    history: List[HistoryEntryModel] = Field(default_factory=list)
+
     model_config = ConfigDict(arbitrary_types_allowed=True)
+
+
+#----------------------Etag collection models----------------------
+class CreateEtagModel(BaseModel):
+    shop_url: str = Field(..., description="The domain of the Shopify store, e.g., 'store.calm.com'")
+    page_etags: List[str] = Field(..., description="An array of strings representing ETags for each page")
+class UpdateEtagModel(BaseModel):
+    shop_url: str = Field(..., description="The domain of the Shopify store, e.g., 'store.calm.com'")
+    page_etags: List[str] = Field(..., description="An array of strings representing new ETags for specific pages")
+
+
+
+
