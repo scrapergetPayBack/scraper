@@ -1,7 +1,7 @@
 import asyncio
 import csv
 import database
-file_path = 'C:\\Users\\milan\\OneDrive\\Desktop\\All-Live-Shopify-Sites-Sales-Revenue-between-1000000-and-No-Limit-2024-12-19-0225.custom.csv\\53ba7bc8-ddcf-4f11-9192-d9f243cd0229.csv'  # Replace with your actual file path
+file_path = '53ba7bc8-ddcf-4f11-9192-d9f243cd0229.csv'  # Replace with your actual file path
 
 async def read_csv_into_database():
     with open(file_path, mode='r', encoding='utf-8') as file:
