@@ -11,7 +11,7 @@ from pydantic import ValidationError
 
 
 # uri = "mongodb://admin:your-secure-password@172.235.51.17:27017"
-uri = "mongodb+srv://milanmilancen12345:TusbFJTRnzR8Lra7@cluster0shopify.1wo95.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0Shopify"
+uri = "mongodb+srv://username:password@172.235.51.17:27017"
 client = AsyncIOMotorClient(uri)
 
 
