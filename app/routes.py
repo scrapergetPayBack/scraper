@@ -142,6 +142,7 @@ async def start_scraper():
 
 
 
+
 # Create the FastAPI app
 app = FastAPI()
 
@@ -153,7 +154,7 @@ async def run_api_server():
     """
     Run the FastAPI server using Uvicorn.
     """
-    config = uvicorn.Config(app, host="127.0.0.1", port=8000, log_level="info")
+    config = uvicorn.Config(app, host="0.0.0.0", port=8000, log_level="info")
     server = uvicorn.Server(config)
     await server.serve()
 

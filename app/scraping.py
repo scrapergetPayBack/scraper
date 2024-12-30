@@ -2662,6 +2662,21 @@ async def calculate_sale_percentage(shop_id):
     return round(percentage_of_products_on_sale)
 
 
+
+async def calculate_average_discount(shop_id):
+    """
+    Difference between price and compare_at_price of each product
+    If there is no compare_at_price then the difference should be zero
+    And average for every product
+    """
+    average_discount = await database.calculate_average_discount(shop_id)
+    await database.save_average_discount(shop_id)
+
+
+
+
+
+
 def calculate_scan_frequency(sale_percentage):
     if(sale_percentage >= 50):
         return '72 hours'
@@ -2984,23 +2999,6 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-
-# async def main():
-#     """
-#     Main entry point for running both the scraper and the API server concurrently.
-#     """
-#     # Run the scraper and the API server concurrently
-#     await asyncio.gather(
-#         enqueue_products(),  # Scraper
-#         run_api_server(),    # API server
-#     )
-
-
-# if __name__ == "__main__":
-#     asyncio.run(main())
-
-
 
 
 
